@@ -1,9 +1,8 @@
-import InputAtom, { InputAtomProps } from "../../atoms/Input";
-import { ButtonAtomProps } from "../../atoms/button";
-import HeadingAtom from "../../atoms/heading";
 import { ReactElement } from "react";
+import InputAtom, { InputAtomProps } from "../../atoms/Input";
+import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
+import HeadingAtom from "../../atoms/heading";
 import ParagraphAtom from "../../atoms/paragraph";
-import ButtonAtom from "../../atoms/button/index";
 import LinkAtom from "../../atoms/link";
 
 export type SignUpFormMoleculeProps = {

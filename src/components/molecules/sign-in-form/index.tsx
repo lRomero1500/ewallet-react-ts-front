@@ -1,10 +1,12 @@
-import InputAtom, { InputAtomProps } from "../../atoms/Input";
-import { ButtonAtomProps } from "../../atoms/button";
-import HeadingAtom from "../../atoms/heading";
 import { ReactElement } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import HeadingAtom from "../../atoms/heading";
 import ParagraphAtom from "../../atoms/paragraph";
-import ButtonAtom from "../../atoms/button/index";
+import InputAtom, { InputAtomProps } from "../../atoms/Input";
 import SpanAtom from "../../atoms/span";
+import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
 import LinkAtom from "../../atoms/link";
 
 export type SignInFormMoleculeProps = {
@@ -22,29 +24,25 @@ const SingInFormMolecule = ({
 }: SignInFormMoleculeProps): ReactElement => {
   return (
     <>
-      <div className="container">
-        <div className="row py-5 mt-4 align-items-center">
-          <div className="col-md-5 pr-lg-5 mb-5 mb-md-0">
-            <img
-              src="/src/assets/loginScreen.svg"
-              alt="loginImage"
-              className="img-fluid mb-3 d-none d-md-block"
-            />
+      <Container>
+        <Row className="row py-5 mt-4 align-items-center">
+          <Col className="col-md-5 pr-lg-5 mb-5 mb-md-0">
             <HeadingAtom level={1} className="">
               Inicio de Sesion
             </HeadingAtom>
             <ParagraphAtom className="font-italic text-muted mb-0">
-              "¡Bienvenido a Dany Wallet! Tu billetera digital segura y
-              conveniente. Administra tus finanzas en un solo lugar."
+              ¡Bienvenido a Dany Wallet! Tu billetera digital segura y
+              conveniente. Administra tus finanzas en un solo lugar.
             </ParagraphAtom>
-          </div>
-          <div className="col-md-7 col-lg-6 ml-auto">
-            <form id={idForm}>
-              <div className="row">
+            <Form>
+              <Form.Group className="row" controlId={idForm}>
                 <div className="input-group col-lg-12 mb-4">
                   <div className="input-group-prepend">
                     <span className="input-group-text bg-white px-4 border-md border-right-0">
-                      <i className="fa fa-envelope text-muted"></i>
+                      <FontAwesomeIcon
+                        icon={faEnvelope}
+                        className="text-muted"
+                      />
                     </span>
                   </div>
                   <InputAtom {...email}></InputAtom>
@@ -52,7 +50,7 @@ const SingInFormMolecule = ({
                 <div className="input-group col-lg-12 mb-4">
                   <div className="input-group-prepend">
                     <span className="input-group-text bg-white px-4 border-md border-right-0">
-                      <i className="fa fa-lock text-muted"></i>
+                      <FontAwesomeIcon icon={["fas", "lock"]} />
                     </span>
                   </div>
                   <InputAtom {...password}></InputAtom>
@@ -71,11 +69,11 @@ const SingInFormMolecule = ({
                     </LinkAtom>
                   </ParagraphAtom>
                 </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

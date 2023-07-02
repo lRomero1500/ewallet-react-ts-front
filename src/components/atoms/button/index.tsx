@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, MouseEventHandler, ReactElement } from "react";
+import { Button } from "react-bootstrap";
 
 export type ButtonAtomProps = {
   text: string;
@@ -17,14 +18,14 @@ const ButtonAtom = ({
   className,
 }: ButtonAtomProps): ReactElement => {
   return (
-    <button
+    <Button
       type={type ?? "button"}
       onClick={onClick}
       disabled={disabled ?? false}
       className={className ?? ""}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 export default ButtonAtom;
