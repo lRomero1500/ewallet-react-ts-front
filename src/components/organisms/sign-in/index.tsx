@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactElement } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import SingInFormMolecule, {
   SignInFormMoleculeProps,
 } from "../../molecules/sign-in-form";
@@ -14,31 +14,32 @@ const SingInOrganisms = (): ReactElement => {
   };
   return (
     <Container fluid>
-      <Row>
-        <SingInFormMolecule
-          email={{
-            id: "email-sign-in",
-            name: "email-sign-in",
-            type: "email",
-            value: "",
-            className: "",
-            placeholder: "",
-          }}
-          password={{
-            id: "password-sign-in",
-            name: "password-sign-in",
-            type: "password",
-            value: "",
-            className: "",
-            placeholder: "",
-          }}
-          button={{
-            text: "",
-            children: "Botón",
-            onClick: actionButtonFunction,
-          }}
-          idForm={"sig-in-form-01"}
-        />
+      <Row className="py-5 mt-4 align-items-center">
+        <Col>
+          <SingInFormMolecule
+            email={{
+              id: "email-sign-in",
+              name: "email-sign-in",
+              type: "email",
+              value: "",
+              className: "form-control bg-white border-left-0 border-md",
+              placeholder: "",
+            }}
+            password={{
+              id: "password-sign-in",
+              name: "password-sign-in",
+              type: "password",
+              value: "",
+              className: "form-control bg-white border-left-0 border-md",
+              placeholder: "",
+            }}
+            button={{
+              className: "btn primary btn-block py-2",
+              onClick: actionButtonFunction,
+            }}
+            idForm={"sig-in-form-01"}
+          />
+        </Col>
       </Row>
     </Container>
   );

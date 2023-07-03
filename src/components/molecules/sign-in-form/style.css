@@ -1,0 +1,6 @@
+.title {
+    margin-bottom: calc(var(--height-size)/2);
+}
+.sub-title{
+    margin-bottom: var(--height-size);
+}
