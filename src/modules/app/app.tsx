@@ -4,6 +4,7 @@ import AuthLayout from "../../layouts/auth";
 import DashboardLayout from "../../layouts/dashboard";
 import SignInPage from "../auth/pages/sign-in";
 import SignUpPage from "../auth/pages/sign-up";
+import DashboardPage from "../dashboard/pages/lobby";
 
 const App = (): ReactElement => {
   return (
@@ -14,7 +15,7 @@ const App = (): ReactElement => {
           <Route path="/sign-up" element={<SignUpPage />} />
         </Route>
         <Route element={<DashboardLayout />}>
-          <Route path="/" />
+          <Route path="/" element={<DashboardPage />} />
         </Route>
       </Routes>
     </>

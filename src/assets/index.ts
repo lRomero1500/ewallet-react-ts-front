@@ -1,4 +1,5 @@
 import loginScreen from "./loginScreen.svg";
 import signUpScreen from "./signUpScreen.svg";
+import lobbyScreen from "./lobbyScreen.gif";
 
-export { loginScreen, signUpScreen };
+export { loginScreen, signUpScreen, lobbyScreen };

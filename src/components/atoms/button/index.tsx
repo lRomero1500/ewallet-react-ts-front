@@ -7,10 +7,12 @@ export type ButtonAtomProps = {
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
   className?: string;
+  variant?: string;
 };
 
 const ButtonAtom = ({
   type,
+  variant,
   children,
   onClick,
   disabled,
@@ -18,6 +20,7 @@ const ButtonAtom = ({
 }: ButtonAtomProps): ReactElement => {
   return (
     <Button
+      variant={variant}
       type={type ?? "button"}
       onClick={onClick}
       disabled={disabled ?? false}

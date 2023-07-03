@@ -19,8 +19,12 @@
   --bs-btn-border-color: #ba68c8;
   --bs-btn-disabled-bg: #ba68c8;
   --bs-btn-disabled-border-color: #ba68c8;
-  --bs-btn-hover-bg: #a652b4;
-  --bs-btn-hover-border-color: #a652b4;
+  --bs-btn-hover-bg: #94529f;
+  --bs-btn-hover-border-color: #94529f;
+}
+.btn-outline-secondary{
+  --bs-btn-hover-bg: #94529f;
+  --bs-btn-hover-border-color: #94529f;
 }
 a {
   font-weight: 500;
