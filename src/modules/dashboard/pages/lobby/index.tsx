@@ -10,7 +10,7 @@ const DashboardPage = () => {
           <Image src={lobbyScreen} alt="lobbyScreen"></Image>
         </Col>
         <Col>
-          <LobbyOrganisms></LobbyOrganisms>
+          <LobbyOrganisms />
         </Col>
       </Row>
     </Container>

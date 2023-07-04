@@ -14,7 +14,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-.btn-primary {
+.btn-primary, .bg-primary {
+  --bs-primary-rgb: 187, 105, 201;
   --bs-btn-bg: #ba68c8;
   --bs-btn-border-color: #ba68c8;
   --bs-btn-disabled-bg: #ba68c8;
@@ -22,6 +23,7 @@
   --bs-btn-hover-bg: #94529f;
   --bs-btn-hover-border-color: #94529f;
 }
+
 .btn-outline-secondary{
   --bs-btn-hover-bg: #94529f;
   --bs-btn-hover-border-color: #94529f;

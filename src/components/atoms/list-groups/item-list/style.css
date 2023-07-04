@@ -1,0 +1,8 @@
+.customItemStyle {
+    padding: 10px;
+    margin: 0 10px 0 10px;
+    width: calc(100% - 20px);
+}
+.list-group-item+.list-group-item {
+    border-top-width: 1px;
+}

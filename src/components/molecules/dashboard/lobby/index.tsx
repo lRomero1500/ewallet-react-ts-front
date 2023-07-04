@@ -1,17 +1,17 @@
 import { ReactElement } from "react";
-import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
+import ButtonAtom, { ButtonAtomProps } from "../../../atoms/button";
 import { Col, Container, Row } from "react-bootstrap";
-import HeadingAtom from "../../atoms/heading";
-import ParagraphAtom from "../../atoms/paragraph";
+import HeadingAtom from "../../../atoms/heading";
+import ParagraphAtom from "../../../atoms/paragraph";
 
-export type DashboardMoleculeProps = {
+export type LobbyMoleculeProps = {
   transferMoney: ButtonAtomProps;
   activity: ButtonAtomProps;
 };
-const DashboardMolecule = ({
+const LobbyMolecule = ({
   transferMoney,
   activity,
-}: DashboardMoleculeProps): ReactElement => {
+}: LobbyMoleculeProps): ReactElement => {
   return (
     <>
       <Container fluid>
@@ -52,4 +52,4 @@ const DashboardMolecule = ({
   );
 };
 
-export default DashboardMolecule;
+export default LobbyMolecule;
