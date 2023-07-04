@@ -1,30 +1,33 @@
 import { ButtonHTMLAttributes, MouseEventHandler, ReactElement } from "react";
+import { Button } from "react-bootstrap";
 
 export type ButtonAtomProps = {
-  text: string;
-  children: React.ReactNode;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  children?: React.ReactNode;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
   className?: string;
+  variant?: string;
 };
 
 const ButtonAtom = ({
   type,
+  variant,
   children,
   onClick,
   disabled,
   className,
 }: ButtonAtomProps): ReactElement => {
   return (
-    <button
+    <Button
+      variant={variant}
       type={type ?? "button"}
       onClick={onClick}
       disabled={disabled ?? false}
       className={className ?? ""}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 export default ButtonAtom;

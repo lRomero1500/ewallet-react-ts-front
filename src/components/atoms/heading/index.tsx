@@ -11,6 +11,12 @@ const HeadingAtom = ({
   className,
 }: HeadingAtomProps): ReactElement => {
   const Tag = `h${level}`;
-  return <Tag className={className ?? ""}>{children}</Tag>;
+  return (
+    <Tag className={className ?? ""}>
+      {
+        children
+      }
+    </Tag>
+  );
 };
 export default HeadingAtom;
