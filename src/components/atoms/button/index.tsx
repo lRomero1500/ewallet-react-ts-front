@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 export type ButtonAtomProps = {
   children?: React.ReactNode;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   disabled?: boolean;
   className?: string;

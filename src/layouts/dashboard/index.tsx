@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactElement } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
-import LinkAtom from "../../components/atoms/link";
 import ButtonAtom from "../../components/atoms/button";
 
 const DashboardLayout = (): ReactElement => {
@@ -11,7 +10,9 @@ const DashboardLayout = (): ReactElement => {
     <Container fluid className="d-flex flex-column vh-100">
       <Navbar className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand href="#home"><FontAwesomeIcon icon={faWallet} color="#ba68c8" /> Dany Wallet</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <FontAwesomeIcon icon={faWallet} color="#ba68c8" /> Dany Wallet
+          </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
@@ -23,7 +24,14 @@ const DashboardLayout = (): ReactElement => {
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="ms-1">
-              <ButtonAtom onClick={()=>{console.log('salir')}} variant="outline-secondary">Loguot</ButtonAtom>
+              <ButtonAtom
+                onClick={() => {
+                  console.log("salir");
+                }}
+                variant="outline-secondary"
+              >
+                sign out
+              </ButtonAtom>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

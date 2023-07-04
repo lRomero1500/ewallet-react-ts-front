@@ -14,6 +14,7 @@ export type SignInFormMoleculeProps = {
   password: InputAtomProps;
   button: ButtonAtomProps;
   idForm: string;
+  onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
 };
 
 const SingInFormMolecule = ({
@@ -21,6 +22,7 @@ const SingInFormMolecule = ({
   password,
   button,
   idForm,
+  onSubmit,
 }: SignInFormMoleculeProps): ReactElement => {
   return (
     <>
@@ -34,32 +36,44 @@ const SingInFormMolecule = ({
               ¡Bienvenido a <b>Dany Wallet!</b> Tu billetera digital segura y
               conveniente. Administra tus finanzas en un solo lugar.
             </ParagraphAtom>
-            <Form>
-              <Form.Group className="row" controlId={idForm}>
+            <Form id={idForm} onSubmit={onSubmit} noValidate>
+              <Form.Group className="row">
                 <Container fluid>
                   <Row>
                     <Col>
-                      <InputGroup className="input-group col-lg-12 mb-3">
-                        <InputGroup.Text id="basic-addon1">
+                      <InputGroup
+                        hasValidation
+                        className="input-group col-lg-12 mb-3"
+                      >
+                        <InputGroup.Text id="userPrepend">
                           <FontAwesomeIcon
                             icon={faEnvelope}
                             className="text-muted"
                           />
                         </InputGroup.Text>
-                        <InputAtom {...email}></InputAtom>
+                        <InputAtom
+                          {...email}
+                          ariaDescribedby="userPrepend"
+                        ></InputAtom>
                       </InputGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                      <InputGroup className="input-group col-lg-12 mb-3">
-                        <InputGroup.Text id="basic-addon1">
+                      <InputGroup
+                        hasValidation
+                        className="input-group col-lg-12 mb-3"
+                      >
+                        <InputGroup.Text id="passwordPrepend">
                           <FontAwesomeIcon
                             icon={faLock}
                             className="text-muted"
                           />
                         </InputGroup.Text>
-                        <InputAtom {...password}></InputAtom>
+                        <InputAtom
+                          {...password}
+                          ariaDescribedby="passwordPrepend"
+                        ></InputAtom>
                       </InputGroup>
                     </Col>
                   </Row>

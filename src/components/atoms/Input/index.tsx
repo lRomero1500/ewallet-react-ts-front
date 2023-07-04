@@ -1,4 +1,5 @@
 import { ChangeEvent, HTMLInputTypeAttribute, ReactElement } from "react";
+import { Form } from "react-bootstrap";
 export type InputAtomProps = {
   id?: string;
   name?: string;
@@ -8,7 +9,9 @@ export type InputAtomProps = {
   disabled?: boolean;
   className?: string;
   placeholder?: string;
+  ariaDescribedby?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  error?: React.ReactNode;
 };
 const InputAtom = ({
   id,
@@ -20,19 +23,31 @@ const InputAtom = ({
   onChange,
   className,
   placeholder,
+  error,
+  ariaDescribedby,
 }: InputAtomProps): ReactElement => {
   return (
-    <input
-      type={type}
-      id={id ?? ""}
-      name={name ?? ""}
-      onChange={onChange}
-      defaultValue={value ?? ""}
-      className={className ?? ""}
-      disabled={disabled ?? false}
-      readOnly={readonly ?? false}
-      placeholder={placeholder ?? ""}
-    />
+    <>
+      <Form.Label
+        htmlFor={id ?? ""}
+        label={placeholder ?? ""}
+        className="mb-3"
+      ></Form.Label>
+      <Form.Control
+        id={id ?? ""}
+        type={type}
+        name={name ?? ""}
+        onChange={onChange}
+        defaultValue={value ?? ""}
+        className={className ?? ""}
+        disabled={disabled ?? false}
+        readOnly={readonly ?? false}
+        placeholder={placeholder ?? ""}
+        isValid={!!error}
+        aria-describedby={ariaDescribedby}
+      />
+      <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+    </>
   );
 };
 
