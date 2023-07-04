@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 import { Col, ListGroup, Row, Tab } from "react-bootstrap";
 import ItemListAtom, { ItemListAtomProps } from "../item-list";
-import './style.css'
+import "./style.css";
 
 export type ListGroupAtomProps = {
-  listItemData: Array<ItemListAtomProps>;
+  listItemData: ItemListAtomProps[];
 };
 
 const ListGroupAtom = ({ listItemData }: ListGroupAtomProps): ReactElement => {
@@ -15,16 +15,8 @@ const ListGroupAtom = ({ listItemData }: ListGroupAtomProps): ReactElement => {
         <Col>
           <ListGroup className={showScroll ? "overflow-auto-item" : ""}>
             {listItemData.map((item) => {
-              return (
-                <ItemListAtom
-                  transactionType={item.transactionType}
-                  movementType={item.movementType}
-                  status={item.status}
-                  amount={item.amount}
-                  icon={item.icon}
-                  key={item.key}
-                />
-              );
+              const key = `transactionId_${item.transactionId}`;
+              return <ItemListAtom {...item} key={key} />;
             })}
           </ListGroup>
         </Col>

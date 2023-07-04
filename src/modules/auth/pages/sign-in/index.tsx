@@ -18,7 +18,7 @@ const SignInPage = (): ReactElement => {
             form={{
               email: {
                 id: "email-sign-in",
-                name: "email-sign-in",
+                name: "email",
                 type: "email",
                 value: signInFormHook.values.email,
                 onChange: signInFormHook.handleChange,
@@ -32,7 +32,7 @@ const SignInPage = (): ReactElement => {
               },
               password: {
                 id: "password-sign-in",
-                name: "password-sign-in",
+                name: "password",
                 type: "password",
                 value: signInFormHook.values.password,
                 onChange: signInFormHook.handleChange,

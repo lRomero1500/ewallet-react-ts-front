@@ -1,11 +1,8 @@
 import { ReactElement } from "react";
 import { Badge, Col, Container, ListGroup, Row } from "react-bootstrap";
-import {
-  faDownload,
-  faUpload,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './style.css'
+import "./style.css";
 
 export type ItemListAtomProps = {
   transactionType: string;
@@ -13,7 +10,7 @@ export type ItemListAtomProps = {
   status: string;
   amount: string;
   icon: number;
-  key: string;
+  transactionId: number;
 };
 
 const ItemListAtom = ({
@@ -22,10 +19,12 @@ const ItemListAtom = ({
   status,
   amount,
   icon,
-  key,
+  transactionId,
 }: ItemListAtomProps): ReactElement => {
+  const key = `transactionId_${transactionId}`;
   return (
-    <ListGroup.Item key={`ItemList-${key}`}
+    <ListGroup.Item
+      key={key}
       action
       className="d-flex justify-content-between align-items-start mt-3 shadow customItemStyle"
     >

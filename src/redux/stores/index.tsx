@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "../slices/user-slice";
+import userReducer, { IUserState } from "../slices/user-slice";
 
-export const store = configureStore({
+export interface IRootState {
+  user: IUserState;
+}
+export const store = configureStore<IRootState>({
   reducer: {
     user: userReducer,
   },

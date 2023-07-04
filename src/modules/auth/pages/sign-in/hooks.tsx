@@ -26,6 +26,7 @@ const SignInFormHook = () => {
     validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
+    enableReinitialize: true,
     onSubmit: async (data) => {
       const userData = await AuthService.signInRequest(data);
       dispatch(setUserSignedIn(userData));

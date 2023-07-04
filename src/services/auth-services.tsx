@@ -5,10 +5,8 @@ const AUTH_URL = "http://localhost:3001";
 
 const signInRequest = async (data: SignInDTO): Promise<UserProfileDTO> => {
   const path = "/auth/signIn";
-  return (await axios.post(
-    `${AUTH_URL}${path}`,
-    data
-  )) satisfies UserProfileDTO;
+  return (await axios.post(`${AUTH_URL}${path}`, data))
+    .data satisfies UserProfileDTO;
 };
 const AuthService = {
   signInRequest,

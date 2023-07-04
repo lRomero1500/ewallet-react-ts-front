@@ -11,7 +11,10 @@ export type HistoryMoleculeProps = {
   setIsHistoryActive: Dispatch<SetStateAction<boolean>>;
 };
 
-const HistoryMolecule = ({listItemData, setIsHistoryActive}: HistoryMoleculeProps): ReactElement => {
+const HistoryMolecule = ({
+  listItemData,
+  setIsHistoryActive,
+}: HistoryMoleculeProps): ReactElement => {
   return (
     <>
       <Container fluid>
@@ -24,7 +27,13 @@ const HistoryMolecule = ({listItemData, setIsHistoryActive}: HistoryMoleculeProp
               ¡Bienvenido a tu historial en Dany Wallet! Aquí puedes ver toda tu
               actividad.
             </ParagraphAtom>
-            <ButtonAtom onClick={() => {setIsHistoryActive(false)}}>Ir atrás</ButtonAtom>
+            <ButtonAtom
+              onClick={() => {
+                setIsHistoryActive(false);
+              }}
+            >
+              Ir atrás
+            </ButtonAtom>
           </Col>
         </Row>
         <hr />

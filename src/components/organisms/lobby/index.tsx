@@ -2,45 +2,16 @@ import { ReactElement, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import LobbyMolecule from "../../molecules/dashboard/lobby";
 import HistoryMolecule from "../../molecules/dashboard/history";
+import { ItemListAtomProps } from "../../atoms/list-groups/item-list";
 
-const LobbyOrganisms = (): ReactElement => {
+export type LobbyOrganismsProps = {
+  listItemData: ItemListAtomProps[];
+};
+
+const LobbyOrganisms = ({
+  listItemData,
+}: LobbyOrganismsProps): ReactElement => {
   const [isHistoryActive, setIsHistoryActive] = useState(false);
-
-  const dataTest = [
-    {
-      transactionType: "System deposit",
-      movementType: "Credit",
-      status: "Approved",
-      amount: "1000",
-      icon: 1,
-      key: '1'
-    },
-    {
-      transactionType: "System deposit",
-      movementType: "Credit",
-      status: "Approved",
-      amount: "1000",
-      icon: 0,
-      key: '2'
-    },
-    {
-      transactionType: "System deposit",
-      movementType: "Credit",
-      status: "Approved",
-      amount: "1000",
-      icon: 0,
-      key: '3'
-    },
-    {
-      transactionType: "System deposit",
-      movementType: "Credit",
-      status: "Approved",
-      amount: "1000",
-      icon: 0,
-      key: '4'
-    },
-  ] ;
-
   return (
     <Container fluid>
       <Row className="py-5 mt-4 align-items-center">
@@ -62,7 +33,10 @@ const LobbyOrganisms = (): ReactElement => {
               }}
             />
           ) : (
-            <HistoryMolecule listItemData={dataTest} setIsHistoryActive={setIsHistoryActive} />
+            <HistoryMolecule
+              listItemData={listItemData}
+              setIsHistoryActive={setIsHistoryActive}
+            />
           )}
         </Col>
       </Row>

@@ -28,13 +28,8 @@ const InputAtom = ({
 }: InputAtomProps): ReactElement => {
   return (
     <>
-      <Form.Label
-        htmlFor={id ?? ""}
-        label={placeholder ?? ""}
-        className="mb-3"
-      ></Form.Label>
+      <Form.Label label={placeholder ?? ""} className="mb-3"></Form.Label>
       <Form.Control
-        id={id ?? ""}
         type={type}
         name={name ?? ""}
         onChange={onChange}
