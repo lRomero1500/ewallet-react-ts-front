@@ -1,4 +1,5 @@
 :root {
+  --height-size: 30px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -13,7 +14,26 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+.btn-primary,
+.bg-primary {
+  --bs-primary-rgb: 187, 105, 201;
+  --bs-btn-bg: #ba68c8;
+  --bs-btn-border-color: #ba68c8;
+  --bs-btn-disabled-bg: #ba68c8;
+  --bs-btn-disabled-border-color: #ba68c8;
+  --bs-btn-hover-bg: #94529f;
+  --bs-btn-hover-border-color: #94529f;
+}
+.customStyleContainer {
+  min-height: 94%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-outline-secondary {
+  --bs-btn-hover-bg: #94529f;
+  --bs-btn-hover-border-color: #94529f;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -23,12 +43,16 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+body,
+#root,
+.container {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
+  max-width: initial;
   min-height: 100vh;
+  width: 100%;
 }
 
 h1 {
