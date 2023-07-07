@@ -3,10 +3,10 @@ import SingInOrganisms from "../../../../components/organisms/sign-in/index";
 import "./style.css";
 import { loginScreen } from "../../../../assets";
 import { ReactElement } from "react";
-import SignInFormHook from "./hooks";
+import useSignInFormHook from "./hooks";
 
 const SignInPage = (): ReactElement => {
-  const signInFormHook = SignInFormHook();
+  const signInFormHook = useSignInFormHook();
   return (
     <Container fluid className="global-container">
       <Row className="py-5 mt-4 align-items-center">

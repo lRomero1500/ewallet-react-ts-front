@@ -12,7 +12,7 @@ const initialValues = {
   password: "",
 } as SignInDTO;
 
-const SignInFormHook = () => {
+const useSignInFormHook = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const validationSchema = Yup.object<SignInDTO>().shape({
@@ -35,4 +35,4 @@ const SignInFormHook = () => {
   });
   return formik;
 };
-export default SignInFormHook;
+export default useSignInFormHook;

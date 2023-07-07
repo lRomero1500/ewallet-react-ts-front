@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SignInDTO, UserProfileDTO } from "../dtos/user-dtos";
 
-const AUTH_URL = "http://localhost:3001";
+const AUTH_URL = "http://localhost:3004";
 
 const signInRequest = async (data: SignInDTO): Promise<UserProfileDTO> => {
   const path = "/auth/signIn";
