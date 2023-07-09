@@ -46,6 +46,6 @@ export type SingUpDTO = {
   email: string;
   user_id: string;
   password: string;
-  passwordConfirm: string;
+  confirmPassword: string;
   statusId: string;
 };

@@ -2,10 +2,17 @@ import { Col, Container, Row, Image } from "react-bootstrap";
 import { signUpScreen } from "../../../../assets";
 import SingUpOrganisms from "../../../../components/organisms/sign-up";
 import signUpHooks from "./hooks";
+import { InputAtomSelectOptions } from "../../../../components";
 
 const SignUpPage = () => {
   const [genders, documents] = signUpHooks.useGetCommonLists();
-  const signInFormHook = signUpHooks.useSingUpFormHook(genders, documents);
+  const signUpFormHook = signUpHooks.useSingUpFormHook(genders, documents);
+  const gendersMapped = genders.map((item) => {
+    return { value: item.id, label: item.gender } as InputAtomSelectOptions;
+  });
+  const docTypeMapped = documents.map((item) => {
+    return { value: item.id, label: item.type } as InputAtomSelectOptions;
+  });
   return (
     <Container fluid className="global-container">
       <Row className="py-5 mt-4 align-items-center">
@@ -17,83 +24,155 @@ const SignUpPage = () => {
             form={{
               name: {
                 id: "name-sign-up",
-                name: "name-sign-up",
+                name: "name",
                 type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Name",
+                value: signUpFormHook.values.name,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.name && signUpFormHook.touched.name
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.name,
+                placeholder: "Nombres",
               },
               lastName: {
-                id: "name-sign-up",
-                name: "name-sign-up",
+                id: "lasName-sign-up",
+                name: "lastName",
                 type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Last Name",
+                value: signUpFormHook.values.lastName,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.lastName &&
+                  signUpFormHook.touched.lastName
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.lastName,
+                placeholder: "Apellidos",
               },
               email: {
-                id: "name-sign-up",
-                name: "name-sign-up",
+                id: "email-sign-up",
+                name: "email",
                 type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Mail",
+                value: signUpFormHook.values.email,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.email && signUpFormHook.touched.email
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.email,
+                placeholder: "Correo",
               },
               password: {
-                id: "name-sign-up",
-                name: "name-sign-up",
-                type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Password",
+                id: "password-sign-up",
+                name: "password",
+                type: "password",
+                value: signUpFormHook.values.password,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.password &&
+                  signUpFormHook.touched.password
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.password,
+                placeholder: "Constraseña",
               },
               confirmPassword: {
-                id: "name-sign-up",
-                name: "name-sign-up",
-                type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Confirm password",
+                id: "confirmPassword-sign-up",
+                name: "confirmPassword",
+                type: "password",
+                value: signUpFormHook.values.confirmPassword,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.confirmPassword &&
+                  signUpFormHook.touched.confirmPassword
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.confirmPassword,
+                placeholder: "Confirma Contraseña",
               },
               phoneNumber: {
-                id: "name-sign-up",
-                name: "name-sign-up",
+                id: "phoneNumber-sign-up",
+                name: "phoneNumber",
                 type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Phone",
+                value: signUpFormHook.values.phoneNumber,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.phoneNumber &&
+                  signUpFormHook.touched.phoneNumber
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.phoneNumber,
+                placeholder: "Celular",
               },
               documentType: {
-                id: "name-sign-up",
-                name: "name-sign-up",
-                type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Document type",
+                id: "docTypeId-sign-up",
+                name: "docTypeId",
+                type: "select",
+                value: signUpFormHook.values.docTypeId,
+                options: docTypeMapped,
+                onChange: (e) => {
+                  signUpFormHook.setFieldValue(
+                    "docTypeId",
+                    e.currentTarget.value
+                  );
+                },
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.docTypeId &&
+                  signUpFormHook.touched.docTypeId
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.docTypeId,
+                placeholder: "Tipo de documento",
               },
               identificationNumber: {
-                id: "name-sign-up",
-                name: "name-sign-up",
+                id: "identificationNumber-sign-up",
+                name: "identificationNumber",
                 type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "Document number",
+                value: signUpFormHook.values.identificationNumber,
+                onChange: signUpFormHook.handleChange,
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.identificationNumber &&
+                  signUpFormHook.touched.identificationNumber
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.identificationNumber,
+                placeholder: "Numero Identificacion",
               },
               gender: {
-                id: "name-sign-up",
-                name: "name-sign-up",
-                type: "text",
-                value: "",
-                className: "form-control bg-white border-left-0 border-md",
-                placeholder: "",
+                id: "genderId-sign-up",
+                name: "genderId",
+                type: "select",
+                options: gendersMapped,
+                value: signUpFormHook.values.genderId,
+                onChange: (e) => {
+                  signUpFormHook.setFieldValue(
+                    "genderId",
+                    e.currentTarget.value
+                  );
+                },
+                className: `bg-white border-left-0 border-md ${
+                  signUpFormHook.errors.genderId &&
+                  signUpFormHook.touched.genderId
+                    ? " is-invalid"
+                    : ""
+                }`,
+                error: signUpFormHook.errors.genderId,
+                placeholder: "Genero",
               },
               button: {
+                type: "submit",
                 className: "btn primary btn-block py-2",
-                onClick: () => {
-                  console.log("algo");
-                },
               },
-              idForm: "sig-up-form",
+              idForm: "sign-up-form",
+              onSubmit: signUpFormHook.handleSubmit,
             }}
           />
         </Col>

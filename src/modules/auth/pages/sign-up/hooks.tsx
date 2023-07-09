@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { DocumentTypeDTO, GenderDTO } from "../../../../dtos/common";
 import CommonServices from "../../../../services/common-services";
 
@@ -18,7 +19,7 @@ const initialValues = {
   email: "",
   user_id: "",
   password: "",
-  passwordConfirm: "",
+  confirmPassword: "",
   statusId: "1",
 } as SingUpDTO;
 
@@ -72,7 +73,7 @@ const useSingUpFormHook = (
         /(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
         `Contraseña debe tener al menos una letra en mayuscula,una letra en minuscula, un numero y simbolo`
       ),
-    passwordConfirm: Yup.string()
+    confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), ""], "Las contraseñas deben coincidir")
       .required("El campo confirmación de contraseña es requerido"),
   });
@@ -81,8 +82,9 @@ const useSingUpFormHook = (
     validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
-    enableReinitialize: true,
     onSubmit: async (data) => {
+      data.person_id = uuidv4();
+      data.user_id = uuidv4();
       console.log(data);
     },
   });
