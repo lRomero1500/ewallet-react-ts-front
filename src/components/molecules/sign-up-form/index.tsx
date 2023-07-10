@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import InputAtom, { InputAtomProps } from "../../atoms/Input";
 import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
 import HeadingAtom from "../../atoms/heading";
@@ -14,6 +14,9 @@ import {
   faIdCard,
   faPassport,
 } from "@fortawesome/free-solid-svg-icons";
+import { FormikErrors } from "formik/dist/types";
+import { SingUpDTO } from "../../../dtos/user-dtos";
+import ToastAtom from "../../atoms/toast";
 
 export type SignUpFormMoleculeProps = {
   name: InputAtomProps;
@@ -28,8 +31,30 @@ export type SignUpFormMoleculeProps = {
   confirmPassword: InputAtomProps;
   idForm: string;
   onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
+  errors: FormikErrors<SingUpDTO>;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
+const showToastErrors = (
+  errors: FormikErrors<SingUpDTO>,
+  show: boolean,
+  setShow: React.Dispatch<React.SetStateAction<boolean>>
+): ReactElement => {
+  return (
+    <ToastAtom
+      variant="Danger"
+      title="Errores"
+      showError={show}
+      setShow={setShow}
+    >
+      <ul>
+        {Object.entries(errors).map((item) => {
+          return <li key={item[0]}>{item[1]}</li>;
+        })}
+      </ul>
+    </ToastAtom>
+  );
+};
 const SignUpFormMolecule = ({
   idForm,
   name,
@@ -43,9 +68,15 @@ const SignUpFormMolecule = ({
   password,
   confirmPassword,
   onSubmit,
+  errors,
+  show,
+  setShow,
 }: SignUpFormMoleculeProps): ReactElement => {
   return (
     <>
+      {Object.entries(errors).length
+        ? showToastErrors(errors, show, setShow)
+        : ""}
       <Container fluid>
         <Row>
           <Col>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DocumentTypeDTO, GenderDTO } from "../../../../dtos/common";
 import CommonServices from "../../../../services/common-services";
+import { error } from "console";
 
 const initialValues = {
   person_id: "",

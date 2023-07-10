@@ -3,6 +3,7 @@ import { signUpScreen } from "../../../../assets";
 import SingUpOrganisms from "../../../../components/organisms/sign-up";
 import signUpHooks from "./hooks";
 import { InputAtomSelectOptions } from "../../../../components";
+import { useState } from "react";
 
 const SignUpPage = () => {
   const [genders, documents] = signUpHooks.useGetCommonLists();
@@ -13,6 +14,7 @@ const SignUpPage = () => {
   const docTypeMapped = documents.map((item) => {
     return { value: item.id, label: item.type } as InputAtomSelectOptions;
   });
+  const [show, setShow] = useState(false);
   return (
     <Container fluid className="global-container">
       <Row className="py-5 mt-4 align-items-center">
@@ -78,7 +80,7 @@ const SignUpPage = () => {
                     : ""
                 }`,
                 error: signUpFormHook.errors.password,
-                placeholder: "Constraseña",
+                placeholder: "Contraseña",
               },
               confirmPassword: {
                 id: "confirmPassword-sign-up",
@@ -170,9 +172,17 @@ const SignUpPage = () => {
               button: {
                 type: "submit",
                 className: "btn primary btn-block py-2",
+                disabled: signUpFormHook.isSubmitting,
+                isLoading: signUpFormHook.isSubmitting,
               },
               idForm: "sign-up-form",
-              onSubmit: signUpFormHook.handleSubmit,
+              onSubmit: (e) => {
+                signUpFormHook.handleSubmit(e);
+                setShow(Object.entries(signUpFormHook.errors).length > 1);
+              },
+              errors: signUpFormHook.errors,
+              show: show,
+              setShow: setShow,
             }}
           />
         </Col>

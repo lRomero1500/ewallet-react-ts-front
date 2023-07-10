@@ -7,7 +7,7 @@ export type InputAtomSelectOptions = {
 export type InputAtomProps = {
   id?: string;
   name?: string;
-  type: HTMLInputTypeAttribute | "dropdown" | "textarea";
+  type: HTMLInputTypeAttribute | "select" | "textarea";
   value?: string | number;
   readonly?: boolean;
   disabled?: boolean;
@@ -21,6 +21,76 @@ export type InputAtomProps = {
   ) => void;
   error?: React.ReactNode;
   options?: InputAtomSelectOptions[];
+  showErrorsLocal?: boolean;
+};
+const getControlType = ({
+  id,
+  type,
+  name,
+  value,
+  disabled,
+  readonly,
+  onChange,
+  className,
+  placeholder,
+  error,
+  ariaDescribedby,
+  options,
+}: InputAtomProps): ReactElement => {
+  switch (type) {
+    case "select":
+      return (
+        <Form.Select
+          id={id}
+          name={name ?? ""}
+          onChange={onChange}
+          value={value ?? ""}
+          disabled={disabled ?? false}
+          className={className ?? ""}
+          aria-describedby={ariaDescribedby}
+          isInvalid={!!error}
+        >
+          {placeholder && <option value="">{placeholder}</option>}
+          {options?.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Form.Select>
+      );
+    case "textarea":
+      return (
+        <Form.Control
+          as="textarea"
+          id={id}
+          name={name ?? ""}
+          onChange={onChange}
+          value={value ?? ""}
+          disabled={disabled ?? false}
+          className={className ?? ""}
+          readOnly={readonly}
+          aria-describedby={ariaDescribedby}
+          isInvalid={!!error}
+          placeholder={placeholder}
+        />
+      );
+    default:
+      return (
+        <Form.Control
+          type={type}
+          id={id}
+          name={name ?? ""}
+          onChange={onChange}
+          value={value ?? ""}
+          readOnly={readonly}
+          disabled={disabled ?? false}
+          className={className ?? ""}
+          aria-describedby={ariaDescribedby}
+          isInvalid={!!error}
+          placeholder={placeholder}
+        />
+      );
+  }
 };
 const InputAtom = ({
   id,
@@ -35,50 +105,31 @@ const InputAtom = ({
   error,
   ariaDescribedby,
   options,
+  showErrorsLocal,
 }: InputAtomProps): ReactElement => {
-  const isSelect = type === "select";
-  const isTextarea = type === "textarea";
-
-  const controlProps = {
-    id,
-    name: name ?? "",
-    onChange,
-    value: value ?? "",
-    disabled: disabled ?? false,
-    readOnly: readonly ?? false,
-    className: className ?? "",
-    placeholder: placeholder ?? "",
-    isInvalid: !!error,
-    "aria-describedby": ariaDescribedby,
-  };
-  const selectOptions = options?.map((option) => (
-    <option key={option.value} value={option.value}>
-      {option.label}
-    </option>
-  ));
   return (
     <>
       <Form.Label label={placeholder ?? ""} className="mb-3"></Form.Label>
-      {isSelect ? (
-        <Form.Select
-          id={id}
-          name={name ?? ""}
-          onChange={onChange}
-          value={value ?? ""}
-          disabled={disabled ?? false}
-          className={className ?? ""}
-          aria-describedby={ariaDescribedby}
-          isInvalid={!!error}
-        >
-          {placeholder && <option value="">{placeholder}</option>}
-          {selectOptions}
-        </Form.Select>
-      ) : isTextarea ? (
-        <Form.Control as="textarea" {...controlProps} />
+      {getControlType({
+        id,
+        type,
+        name,
+        value,
+        disabled,
+        readonly,
+        onChange,
+        className,
+        placeholder,
+        error,
+        ariaDescribedby,
+        options,
+        showErrorsLocal,
+      })}
+      {showErrorsLocal ? (
+        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       ) : (
-        <Form.Control type={type} {...controlProps} />
+        <></>
       )}
-      <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
     </>
   );
 };

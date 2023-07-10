@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, MouseEventHandler, ReactElement } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 export type ButtonAtomProps = {
   children?: React.ReactNode;
@@ -8,6 +8,7 @@ export type ButtonAtomProps = {
   disabled?: boolean;
   className?: string;
   variant?: string;
+  isLoading?: boolean;
 };
 
 const ButtonAtom = ({
@@ -17,6 +18,7 @@ const ButtonAtom = ({
   onClick,
   disabled,
   className,
+  isLoading,
 }: ButtonAtomProps): ReactElement => {
   return (
     <Button
@@ -26,6 +28,18 @@ const ButtonAtom = ({
       disabled={disabled ?? false}
       className={className ?? ""}
     >
+      {isLoading ? (
+        <Spinner
+          as="span"
+          animation="grow"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+          className="me-1"
+        />
+      ) : (
+        ""
+      )}
       {children}
     </Button>
   );
