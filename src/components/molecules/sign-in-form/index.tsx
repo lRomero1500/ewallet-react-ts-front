@@ -15,6 +15,9 @@ import InputAtom, { InputAtomProps } from "../../atoms/Input";
 import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
 import LinkAtom from "../../atoms/link";
 import "./style.css";
+import { FormikErrors } from "formik";
+import { SignInDTO } from "../../../dtos/user-dtos";
+import ToastAtom from "../../atoms/toast";
 
 export type SignInFormMoleculeProps = {
   email: InputAtomProps;
@@ -22,17 +25,45 @@ export type SignInFormMoleculeProps = {
   button: ButtonAtomProps;
   idForm: string;
   onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
+  errors: FormikErrors<SignInDTO>;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
+const showToastErrors = (
+  errors: FormikErrors<SignInDTO>,
+  show: boolean,
+  setShow: React.Dispatch<React.SetStateAction<boolean>>
+): ReactElement => {
+  return (
+    <ToastAtom
+      variant="Danger"
+      title="Errores"
+      showError={show}
+      setShow={setShow}
+    >
+      <ul>
+        {Object.entries(errors).map((item) => {
+          return <li key={item[0]}>{item[1]}</li>;
+        })}
+      </ul>
+    </ToastAtom>
+  );
+};
 const SingInFormMolecule = ({
   email,
   password,
   button,
   idForm,
   onSubmit,
+  errors,
+  show,
+  setShow,
 }: SignInFormMoleculeProps): ReactElement => {
   return (
     <>
+      {Object.entries(errors).length
+        ? showToastErrors(errors, show, setShow)
+        : ""}
       <Container fluid>
         <Row>
           <Col>

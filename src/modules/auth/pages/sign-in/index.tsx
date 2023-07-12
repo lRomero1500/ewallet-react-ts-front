@@ -2,10 +2,11 @@ import { Col, Container, Row, Image } from "react-bootstrap";
 import SingInOrganisms from "../../../../components/organisms/sign-in/index";
 import "./style.css";
 import { loginScreen } from "../../../../assets";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import useSignInFormHook from "./hooks";
 
 const SignInPage = (): ReactElement => {
+  const [show, setShow] = useState(false);
   const signInFormHook = useSignInFormHook();
   return (
     <Container fluid className="global-container">
@@ -28,7 +29,7 @@ const SignInPage = (): ReactElement => {
                     : ""
                 }`,
                 error: signInFormHook.errors.email,
-                placeholder: "",
+                placeholder: "Email",
               },
               password: {
                 id: "password-sign-in",
@@ -43,14 +44,22 @@ const SignInPage = (): ReactElement => {
                     : ""
                 }`,
                 error: signInFormHook.errors.password,
-                placeholder: "",
+                placeholder: "Contraseña",
               },
               button: {
                 type: "submit",
                 className: "btn primary btn-block py-2",
+                disabled: signInFormHook.isSubmitting,
+                isLoading: signInFormHook.isSubmitting,
               },
               idForm: "sig-in-form-01",
-              onSubmit: signInFormHook.handleSubmit,
+              onSubmit: (e) => {
+                signInFormHook.handleSubmit(e);
+                setShow(Object.entries(signInFormHook.errors).length > 1);
+              },
+              errors: signInFormHook.errors,
+              show: show,
+              setShow: setShow,
             }}
           />
         </Col>
