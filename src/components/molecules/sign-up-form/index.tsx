@@ -4,15 +4,7 @@ import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
 import HeadingAtom from "../../atoms/heading";
 import ParagraphAtom from "../../atoms/paragraph";
 import LinkAtom from "../../atoms/link";
-import {
-  Col,
-  Container,
-  Row,
-  Form,
-  InputGroup,
-  DropdownButton,
-  Dropdown,
-} from "react-bootstrap";
+import { Col, Container, Row, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -22,6 +14,9 @@ import {
   faIdCard,
   faPassport,
 } from "@fortawesome/free-solid-svg-icons";
+import { FormikErrors } from "formik/dist/types";
+import { SingUpDTO } from "../../../dtos/user-dtos";
+import ToastAtom from "../../atoms/toast";
 
 export type SignUpFormMoleculeProps = {
   name: InputAtomProps;
@@ -35,8 +30,31 @@ export type SignUpFormMoleculeProps = {
   password: InputAtomProps;
   confirmPassword: InputAtomProps;
   idForm: string;
+  onSubmit: React.FormEventHandler<HTMLFormElement> | undefined;
+  errors: FormikErrors<SingUpDTO>;
+  show: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
+const showToastErrors = (
+  errors: FormikErrors<SingUpDTO>,
+  show: boolean,
+  setShow: React.Dispatch<React.SetStateAction<boolean>>
+): ReactElement => {
+  return (
+    <ToastAtom
+      variant="Danger"
+      title="Errores"
+      showNotification={show}
+      setShow={setShow}
+    >
+      <ul>
+        {Object.entries(errors).map((item) => {
+          return <li key={item[0]}>{item[1]}</li>;
+        })}
+      </ul>
+    </ToastAtom>
+  );
+};
 const SignUpFormMolecule = ({
   idForm,
   name,
@@ -49,9 +67,16 @@ const SignUpFormMolecule = ({
   email,
   password,
   confirmPassword,
+  onSubmit,
+  errors,
+  show,
+  setShow,
 }: SignUpFormMoleculeProps): ReactElement => {
   return (
     <>
+      {Object.entries(errors).length
+        ? showToastErrors(errors, show, setShow)
+        : ""}
       <Container fluid>
         <Row>
           <Col>
@@ -63,8 +88,8 @@ const SignUpFormMolecule = ({
               y descubre la libertad de una billetera digital. ¡Tu futuro
               financiero comienza aquí!
             </ParagraphAtom>
-            <Form>
-              <Form.Group className="row" controlId={idForm}>
+            <Form id={idForm} onSubmit={onSubmit} noValidate>
+              <Form.Group className="row">
                 <Container fluid>
                   <Row>
                     <Col>
@@ -128,16 +153,7 @@ const SignUpFormMolecule = ({
                             className="text-muted"
                           />
                         </InputGroup.Text>
-                        <DropdownButton
-                          variant="outline-secondary"
-                          title="Type"
-                          id="input-group-dropdown-1"
-                        >
-                          <Dropdown.Item href="#">C.E</Dropdown.Item>
-                          <Dropdown.Item href="#">C.C</Dropdown.Item>
-                          <Dropdown.Item href="#">Passport</Dropdown.Item>
-                        </DropdownButton>
-                        {/* <InputAtom {...documentType}></InputAtom> */}
+                        <InputAtom {...documentType}></InputAtom>
                         <InputAtom {...identificationNumber}></InputAtom>
                       </InputGroup>
                     </Col>
