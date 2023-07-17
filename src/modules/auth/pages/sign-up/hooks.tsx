@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DocumentTypeDTO, GenderDTO } from "../../../../dtos/common";
 import CommonServices from "../../../../services/common-services";
-import { error } from "console";
+import { EnrollmentDTO } from "../../../../dtos/user-dtos/index";
+import AuthService from "../../../../services/auth-services";
+import { InputAtomSelectOptions } from "../../../../components/atoms";
+import { useToast } from "../../../../providers/notifications";
 
 const initialValues = {
   person_id: "",
@@ -30,6 +33,7 @@ const useSingUpFormHook = (
 ) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { addNotification, notifications } = useToast();
   const gendersKeys = genders.map((i) => i.id);
   const documentKeys = documentTypes.map((i) => i.id);
   const validationSchema = Yup.object<SingUpDTO>().shape({
@@ -86,28 +90,86 @@ const useSingUpFormHook = (
     onSubmit: async (data) => {
       data.person_id = uuidv4();
       data.user_id = uuidv4();
-      console.log(data);
+
+      const enrollmentData: EnrollmentDTO = {
+        person: {
+          id: data.person_id,
+          name: data.name,
+          lastName: data.lastName,
+          genderId: data.genderId,
+          docTypeId: data.docTypeId,
+          identificationNumber: data.identificationNumber,
+          phoneNumber: data.phoneNumber,
+          email: data.email,
+        },
+        user: {
+          id: data.user_id,
+          password: data.password,
+          statusId: data.statusId,
+        },
+      };
+      const result = await AuthService.signUpRequest(enrollmentData);
+      if (result.isSuccess) {
+        addNotification({
+          id: Date.now(),
+          variant: "Success",
+          title: "¡Registro exitoso!",
+          show: true,
+          children: "El registro se ha realizado correctamente.",
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
+      console.log(result);
     },
   });
   return formik;
 };
-const useGetCommonLists = (): [GenderDTO[], DocumentTypeDTO[]] => {
+const useGetCommonLists = (): [
+  GenderDTO[],
+  DocumentTypeDTO[],
+  InputAtomSelectOptions[],
+  InputAtomSelectOptions[]
+] => {
   const [documentTypes, setDocumentTypes] = useState<DocumentTypeDTO[]>([]);
+  const [gendersMapped, setGendersMapped] = useState<InputAtomSelectOptions[]>(
+    []
+  );
+  const [docTypeMapped, setDocTypeMapped] = useState<InputAtomSelectOptions[]>(
+    []
+  );
   const [genders, setGenders] = useState<GenderDTO[]>([]);
   useEffect(() => {
     const getLists = async () => {
       if (!documentTypes.length) {
         const result = await CommonServices.getDocumentTypes();
         setDocumentTypes(result.data as DocumentTypeDTO[]);
+        setDocTypeMapped(
+          (result.data as DocumentTypeDTO[]).map((item) => {
+            return {
+              value: item.id,
+              label: item.type,
+            } as InputAtomSelectOptions;
+          })
+        );
       }
       if (!genders.length) {
         const result = await CommonServices.getGenders();
         setGenders(result.data as GenderDTO[]);
+        setGendersMapped(
+          (result.data as GenderDTO[]).map((item) => {
+            return {
+              value: item.id,
+              label: item.gender,
+            } as InputAtomSelectOptions;
+          })
+        );
       }
     };
     getLists();
   }, [documentTypes.length, genders.length]);
-  return [genders, documentTypes];
+  return [genders, documentTypes, gendersMapped, docTypeMapped];
 };
 
 const signUpHooks = {

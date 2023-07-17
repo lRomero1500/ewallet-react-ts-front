@@ -2,18 +2,12 @@ import { Col, Container, Row, Image } from "react-bootstrap";
 import { signUpScreen } from "../../../../assets";
 import SingUpOrganisms from "../../../../components/organisms/sign-up";
 import signUpHooks from "./hooks";
-import { InputAtomSelectOptions } from "../../../../components";
 import { useState } from "react";
 
 const SignUpPage = () => {
-  const [genders, documents] = signUpHooks.useGetCommonLists();
+  const [genders, documents, gendersMapped, docTypeMapped] =
+    signUpHooks.useGetCommonLists();
   const signUpFormHook = signUpHooks.useSingUpFormHook(genders, documents);
-  const gendersMapped = genders.map((item) => {
-    return { value: item.id, label: item.gender } as InputAtomSelectOptions;
-  });
-  const docTypeMapped = documents.map((item) => {
-    return { value: item.id, label: item.type } as InputAtomSelectOptions;
-  });
   const [show, setShow] = useState(false);
   return (
     <Container fluid className="global-container">

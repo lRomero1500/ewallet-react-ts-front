@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
   faCircleCheck,
-  faCircleXmark,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement } from "react";
@@ -20,8 +19,9 @@ export type ToastAtomProps = {
     | "Light"
     | "Dark";
   title: string;
-  showError: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  showNotification?: boolean;
+  isList?: boolean;
+  setShow?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const getIconVariant = (variant: string): ReactElement => {
   switch (variant) {
@@ -44,22 +44,25 @@ const ToastAtom = ({
   children,
   variant,
   title,
-  showError,
+  showNotification,
+  isList,
   setShow,
 }: ToastAtomProps) => {
   return (
     <>
       <Toast
-        className="position-fixed bottom-0 end-0 p-1 toast hide"
+        className={`${
+          isList ? `` : `position-fixed bottom-0 end-0`
+        } p-1 toast hide`}
         style={{ zIndex: 11 }}
-        onClose={() => setShow(false)}
-        show={showError}
+        onClose={() => (setShow ? setShow(false) : undefined)}
+        show={showNotification}
         aria-atomic={true}
       >
         <Toast.Header className={`bg-${variant.toLowerCase()} text-white`}>
           {getIconVariant(variant)}
           <strong className="me-auto">{title}</strong>
-          <small>11 mins ago</small>
+          {/* <small>11 mins ago</small> to put the time since the toast notification was generated */}
         </Toast.Header>
         <Toast.Body>{children}</Toast.Body>
       </Toast>

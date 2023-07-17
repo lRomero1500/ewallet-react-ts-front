@@ -2,7 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import BalanceService from "../../services/balance-services";
 import { IRootState } from "../../redux";
 import { useEffect, useState } from "react";
-import { IUserState, setBalance } from "../../redux/slices/user-slice";
+import {
+  IUserState,
+  setBalance,
+  setUserSignedOut,
+} from "../../redux/slices/user-slice";
+import { useNavigate } from "react-router-dom";
 
 const useNavbarHook = (): IUserState => {
   const [result, setResult] = useState("0");
@@ -22,4 +27,17 @@ const useNavbarHook = (): IUserState => {
   }, [dispatch, result, userState.userData?.token]);
   return userState;
 };
-export default useNavbarHook;
+const useSignOutHook = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const signOut = () => {
+    dispatch(setUserSignedOut(null));
+    navigate("/");
+  };
+  return signOut;
+};
+const UserHooks = {
+  useNavbarHook,
+  useSignOutHook,
+};
+export default UserHooks;

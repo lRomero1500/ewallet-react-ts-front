@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { ItemListAtomProps } from "../components";
-import { ActivityDTO } from "../dtos/activity-dtos";
+import { ActivityDTO } from "../dtos/activity-dtos/index";
 
 const TRANSACTIONS_URL = "http://localhost:3002";
 

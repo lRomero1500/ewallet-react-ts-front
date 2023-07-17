@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import InputAtom, { InputAtomProps } from "../../atoms/Input";
 import ButtonAtom, { ButtonAtomProps } from "../../atoms/button";
 import HeadingAtom from "../../atoms/heading";
@@ -44,7 +44,7 @@ const showToastErrors = (
     <ToastAtom
       variant="Danger"
       title="Errores"
-      showError={show}
+      showNotification={show}
       setShow={setShow}
     >
       <ul>

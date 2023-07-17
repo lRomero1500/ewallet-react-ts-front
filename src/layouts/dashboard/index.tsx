@@ -4,13 +4,11 @@ import { ReactElement } from "react";
 import { Container, Navbar } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import ButtonAtom from "../../components/atoms/button";
-import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../../redux";
-import useNavbarHook from "./hooks";
-import { setBalance } from "../../redux/slices/user-slice";
+import UserHooks from "./hooks";
 
 const DashboardLayout = (): ReactElement => {
-  const user = useNavbarHook();
+  const user = UserHooks.useNavbarHook();
+  const signOut = UserHooks.useSignOutHook();
   return (
     <Container fluid className="d-flex flex-column vh-100">
       <Navbar className="bg-body-tertiary">
@@ -30,12 +28,7 @@ const DashboardLayout = (): ReactElement => {
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="ms-1">
-              <ButtonAtom
-                onClick={() => {
-                  console.log("salir");
-                }}
-                variant="outline-secondary"
-              >
+              <ButtonAtom onClick={signOut} variant="outline-secondary">
                 sign out
               </ButtonAtom>
             </Navbar.Text>
