@@ -31,9 +31,8 @@ const useSingUpFormHook = (
   genders: GenderDTO[],
   documentTypes: DocumentTypeDTO[]
 ) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { addNotification, notifications } = useToast();
+  const { addNotification } = useToast();
   const gendersKeys = genders.map((i) => i.id);
   const documentKeys = documentTypes.map((i) => i.id);
   const validationSchema = Yup.object<SingUpDTO>().shape({

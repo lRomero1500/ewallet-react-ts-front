@@ -7,7 +7,7 @@ import ButtonAtom from "../../components/atoms/button";
 import UserHooks from "./hooks";
 
 const DashboardLayout = (): ReactElement => {
-  const user = UserHooks.useNavbarHook();
+  const user = UserHooks.useNavbarHook().userState;
   const signOut = UserHooks.useSignOutHook();
   return (
     <Container fluid className="d-flex flex-column vh-100">

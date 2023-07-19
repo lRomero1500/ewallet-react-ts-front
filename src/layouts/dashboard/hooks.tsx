@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import BalanceService from "../../services/balance-services";
 import { IRootState } from "../../redux";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   IUserState,
   setBalance,
@@ -9,23 +9,28 @@ import {
 } from "../../redux/slices/user-slice";
 import { useNavigate } from "react-router-dom";
 
-const useNavbarHook = (): IUserState => {
+type NavbarHookProps = {
+  userState: IUserState;
+  getBalance: () => Promise<void>;
+};
+
+const useNavbarHook = (): NavbarHookProps => {
   const [result, setResult] = useState("0");
   const dispatch = useDispatch();
   const userState = useSelector((state: IRootState) => {
     return state.user;
   });
+  const getBalance = useCallback(async () => {
+    const balance = await BalanceService.getBalance(
+      userState.userData?.token ?? ""
+    );
+    setResult(balance);
+  }, [userState.userData?.token]);
   useEffect(() => {
-    const getBalance = async () => {
-      const balance = await BalanceService.getBalance(
-        userState.userData?.token ?? ""
-      );
-      setResult(balance);
-    };
     getBalance();
     dispatch(setBalance(Number.parseFloat(result)));
-  }, [dispatch, result, userState.userData?.token]);
-  return userState;
+  }, [dispatch, result, userState.userData?.token, getBalance]);
+  return { userState, getBalance };
 };
 const useSignOutHook = () => {
   const dispatch = useDispatch();

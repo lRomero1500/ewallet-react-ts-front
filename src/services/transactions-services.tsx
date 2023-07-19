@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { ItemListAtomProps } from "../components";
 import { ActivityDTO } from "../dtos/activity-dtos/index";
+import { ICommonResponse } from "../interfaces/commonResponse";
+import { TransferAmountDTO } from "../dtos/transaction-dtos";
 
 const TRANSACTIONS_URL = "http://localhost:3002";
 
@@ -16,6 +18,18 @@ const getActivity = async (token: string): Promise<ItemListAtomProps[]> => {
       .data as ActivityDTO[]
   );
   return result;
+};
+const transferMoney = async (
+  data: TransferAmountDTO,
+  token: string
+): Promise<ICommonResponse> => {
+  const path = "/transactions/transferAmount";
+  const options: AxiosRequestConfig = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return (await axios.post(`${TRANSACTIONS_URL}${path}`, data, options)).data;
 };
 const parseToItemListAtomProps = (data: ActivityDTO[]): ItemListAtomProps[] => {
   const result: ItemListAtomProps[] = [];
@@ -33,5 +47,6 @@ const parseToItemListAtomProps = (data: ActivityDTO[]): ItemListAtomProps[] => {
 };
 const TransactionsService = {
   getActivity,
+  transferMoney,
 };
 export default TransactionsService;
