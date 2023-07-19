@@ -6,10 +6,14 @@ import { ItemListAtomProps } from "../../atoms/list-groups/item-list";
 
 export type LobbyOrganismsProps = {
   listItemData: ItemListAtomProps[];
+  transferMoneyHandleClick:
+    | React.MouseEventHandler<HTMLButtonElement>
+    | undefined;
 };
 
 const LobbyOrganisms = ({
   listItemData,
+  transferMoneyHandleClick,
 }: LobbyOrganismsProps): ReactElement => {
   const [isHistoryActive, setIsHistoryActive] = useState(false);
   return (
@@ -20,9 +24,7 @@ const LobbyOrganisms = ({
             <LobbyMolecule
               transferMoney={{
                 className: "btn primary btn-block py-2",
-                onClick: () => {
-                  console.log();
-                },
+                onClick: transferMoneyHandleClick,
               }}
               activity={{
                 variant: "outline-secondary",

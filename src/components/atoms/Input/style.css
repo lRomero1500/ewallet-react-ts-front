@@ -1,0 +1,8 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 40rem #ffff inset;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}

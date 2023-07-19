@@ -1,5 +1,6 @@
 import { ChangeEvent, HTMLInputTypeAttribute, ReactElement } from "react";
 import { Form } from "react-bootstrap";
+import "./style.css";
 export type InputAtomSelectOptions = {
   value: string | number;
   label: string;
@@ -43,11 +44,14 @@ const getControlType = ({
         <Form.Select
           id={id}
           name={name ?? ""}
+          title={placeholder}
           onChange={onChange}
           value={value ?? ""}
           disabled={disabled ?? false}
           className={className ?? ""}
           aria-describedby={ariaDescribedby}
+          aria-labelledby={placeholder}
+          aria-label={placeholder}
           isInvalid={!!error}
         >
           {placeholder && <option value="">{placeholder}</option>}
@@ -109,7 +113,11 @@ const InputAtom = ({
 }: InputAtomProps): ReactElement => {
   return (
     <>
-      <Form.Label label={placeholder ?? ""} className="mb-3"></Form.Label>
+      <Form.Label
+        htmlFor={id}
+        label={placeholder ?? ""}
+        className="mb-3"
+      ></Form.Label>
       {getControlType({
         id,
         type,

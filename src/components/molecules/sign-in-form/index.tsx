@@ -1,12 +1,5 @@
 import { ReactElement } from "react";
-import {
-  Col,
-  Container,
-  Form,
-  FormGroup,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import HeadingAtom from "../../atoms/heading";
@@ -38,7 +31,7 @@ const showToastErrors = (
     <ToastAtom
       variant="Danger"
       title="Errores"
-      showError={show}
+      showNotification={show}
       setShow={setShow}
     >
       <ul>
@@ -75,12 +68,12 @@ const SingInFormMolecule = ({
               conveniente. Administra tus finanzas en un solo lugar.
             </ParagraphAtom>
             <Form id={idForm} onSubmit={onSubmit} noValidate>
-              <Form.Group controlId={email.id} className="row">
+              <Form.Group className="row">
                 <InputGroup
                   hasValidation
                   className="input-group col-lg-12 mb-3"
                 >
-                  <InputGroup.Text id="userPrepend">
+                  <InputGroup.Text>
                     <FontAwesomeIcon icon={faEnvelope} className="text-muted" />
                   </InputGroup.Text>
                   <InputAtom
@@ -89,12 +82,12 @@ const SingInFormMolecule = ({
                   ></InputAtom>
                 </InputGroup>
               </Form.Group>
-              <Form.Group controlId={password.id} className="row">
+              <Form.Group className="row">
                 <InputGroup
                   hasValidation
                   className="input-group col-lg-12 mb-3"
                 >
-                  <InputGroup.Text id="passwordPrepend">
+                  <InputGroup.Text>
                     <FontAwesomeIcon icon={faLock} className="text-muted" />
                   </InputGroup.Text>
                   <InputAtom

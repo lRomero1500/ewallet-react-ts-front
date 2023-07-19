@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { UserProfileDTO } from "../../dtos/user-dtos";
-import { number } from "yup";
 import { ItemListAtomProps } from "../../components";
 
 export interface IUserState {

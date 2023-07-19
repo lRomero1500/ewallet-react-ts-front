@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../../../../redux";
-import TransactionsService from "../../../../services/transactions-services";
-import { IUserState, setActivity } from "../../../../redux/slices/user-slice";
+import { IRootState } from "../../../../../redux";
+import TransactionsService from "../../../../../services/transactions-services";
+import {
+  IUserState,
+  setActivity,
+} from "../../../../../redux/slices/user-slice";
 import { useEffect, useState } from "react";
-import { ItemListAtomProps } from "../../../../components/atoms/list-groups/item-list/index";
+import { ItemListAtomProps } from "../../../../../components/atoms/list-groups/item-list/index";
 
 const useLobbyHook = (): IUserState => {
   const [result, setResult] = useState<ItemListAtomProps[]>([]);
@@ -20,6 +23,7 @@ const useLobbyHook = (): IUserState => {
     };
     getActivityData();
     dispatch(setActivity(result));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState.activity.length, result.length]);
 
   return userState;

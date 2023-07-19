@@ -94,14 +94,14 @@ const SignUpFormMolecule = ({
                   <Row>
                     <Col>
                       <InputGroup className="col-lg-6 mb-4">
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faUser}
                             className="text-muted"
                           />
                         </InputGroup.Text>
                         <InputAtom {...name}></InputAtom>
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faUser}
                             className="text-muted"
@@ -114,7 +114,7 @@ const SignUpFormMolecule = ({
                   <Row>
                     <Col>
                       <InputGroup className=" col-lg-12 mb-4">
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faEnvelope}
                             className="text-muted"
@@ -127,14 +127,14 @@ const SignUpFormMolecule = ({
                   <Row>
                     <Col>
                       <InputGroup className="col-lg-12 mb-4">
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faPhone}
                             className="text-muted"
                           />
                         </InputGroup.Text>
                         <InputAtom {...phoneNumber}></InputAtom>
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faTransgender}
                             className="text-muted"
@@ -147,7 +147,7 @@ const SignUpFormMolecule = ({
                   <Row>
                     <Col>
                       <InputGroup className="input-group col-lg-6 mb-4">
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faIdCard}
                             className="text-muted"
@@ -161,7 +161,7 @@ const SignUpFormMolecule = ({
                   <Row>
                     <Col>
                       <InputGroup className="input-group col-lg-6 mb-4">
-                        <InputGroup.Text id="basic-addon1">
+                        <InputGroup.Text>
                           <FontAwesomeIcon
                             icon={faPassport}
                             className="text-muted"
